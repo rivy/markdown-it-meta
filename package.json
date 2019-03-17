@@ -1,7 +1,10 @@
 {
   "name": "markdown-it-meta",
+  "browserModuleName": "markdownItMeta",
   "version": "0.0.1",
   "scripts": {
+    "//browserify": "rimraf dist && mkdirp dist && cross-var browserify ./ -s $npm_package_defaultModuleName -p [ browserify-wrap --prefix \"/*! $npm_package_name (as $npm_package_browserModuleName) $npm_package_version $npm_package_homepage @license $npm_package_license */\" ] | cross-var ntee -s dist/$npm_package_name.js && cross-var uglifyjs dist/$npm_package_name.js --beautify beautify=false,ascii_only=true,preamble=\"'/*! $npm_package_name (as $npm_package_browserModuleName) $npm_package_version $npm_package_homepage @license $npm_package_license */'\" | cross-var ntee -s dist/$npm_package_name.min.js",
+    "browserify": "rimraf dist && mkdirp dist && cross-var browserify ./ -s $npm_package_browserModuleName -p [ browserify-wrap --prefix \"/*! $npm_package_name (as $npm_package_browserModuleName) $npm_package_version $npm_package_homepage @license $npm_package_license */\" ] | cross-var ntee -s dist/$npm_package_name.js",
     "test": "eslint --fix . && mocha"
   },
   "dependencies": {
@@ -16,12 +19,19 @@
     "markdown"
   ],
   "author": "scott-wyatt",
+  "homepage": "https://github.com/CaliStyle/markdown-it-meta",
   "license": "MIT",
   "devDependencies": {
     "assert": "^1.4.1",
+    "browserify": "^16.2.3",
+    "browserify-wrap": "^1.0.2",
+    "cross-var": "^1.1.0",
     "eslint": "^3.19.0",
     "eslint-config-trails": "^3.0.0",
     "markdown-it": "^8.4.0",
-    "mocha": "^2.4.5"
+    "mocha": "^2.4.5",
+    "ntee": "^1.1.5",
+    "rimraf": "^2.6.3",
+    "uglify-js": "^3.4.10"
   }
 }
